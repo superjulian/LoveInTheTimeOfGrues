@@ -1,0 +1,12 @@
+{
+    "poi" : [
+        {"type" : "gate", "id" : "east_gate", "x" : 800, "y" : 400, "waypoints" : [{"x" : 400, "y" : 400}, "west_gate"]},
+        {"type" : "gate", "id" : "west_gate", "x" : 0, "y" : 400, "waypoints" : ["east_gate"]}
+    ],
+    "scenery" : [
+        {"type" : "fill", "fill" : "tree", "density" : 20, "min_x" : 0, "max_x" : 200, "min_y" : 600, "max_y" : 750},
+        {"type" : "fill", "fill" : "tree", "density" : 20, "min_x" : 0, "max_x" : 200, "min_y" : 0, "max_y" : 300},
+        {"type" : "fill", "fill" : "tree", "density" : 20, "min_x" : 400, "max_x" : 750, "min_y" : 600, "max_y" : 750},
+        {"type" : "fill", "fill" : "tree", "density" : 20, "min_x" : 400, "max_x" : 750, "min_y" : 0, "max_y" : 300}
+    ]
+}

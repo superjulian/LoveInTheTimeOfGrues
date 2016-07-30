@@ -1,8 +1,8 @@
 (function() {
 "use strict";
 
-function init() {
-    console.debug("init world");
+function init(board) {
+    Grue.init(board);
 }
 
 function fill(item, board, tileset) {
