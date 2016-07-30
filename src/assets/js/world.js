@@ -41,6 +41,8 @@ function load(path, board, tileset) {
     preload.loadFile(path);
 }
 
+};
+
 window.World = {
     init: init,
     load: load
