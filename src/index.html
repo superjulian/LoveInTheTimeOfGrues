@@ -8,8 +8,23 @@
         <script src="/assets/js/grue.js"></script>
         <script src="/assets/js/scenery.js"></script>
         <script src="/assets/js/adventurer.js"></script>
+        <script src="/assets/js/keyboard.js"></script>
     </head>
     <body onload="World.init();">
         <canvas id="world" width="800" height="800"></canvas>
+
+        <!-- Put keybindings here -->
+        <script>
+            var keyhandlers = {}
+            keyhandlers[Keyboard.UP] = function() { console.log("UP"); };
+            keyhandlers[Keyboard.DOWN] = function() { console.log("DOWN"); };
+            keyhandlers[Keyboard.LEFT] = function() { console.log("LEFT"); };
+            keyhandlers[Keyboard.RIGHT] = function() { console.log("RIGHT"); };
+            keyhandlers[Keyboard.SPACE] = function() { console.log("SPACE"); };
+        </script>
+
+        <script>
+            Keyboard.register(keyhandlers);
+        </script>
     </body>
 </html>
