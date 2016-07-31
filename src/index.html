@@ -39,6 +39,7 @@
                 var stage = new createjs.Stage("world");
                 stage = new createjs.Stage("world");
                 World.init(stage);
+                Adventurer.init(stage);
                 World.load("/assets/map/level_1.json");
                 createjs.Ticker.setFPS(30);
                 createjs.Ticker.addEventListener("tick", handleTick);
