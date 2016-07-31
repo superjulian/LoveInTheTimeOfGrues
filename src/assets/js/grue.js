@@ -1,8 +1,10 @@
 (function() {
 "use strict";
 
+var stage;
 var grueData;
 var grueSpriteSheet;
+var thonSprite;
 var grueSprite;
 var inGulp=false;
 var xCo=0;
@@ -12,6 +14,8 @@ var idle=true;
 var boundaries = [];
 
 function init(board) {
+    stage = board;
+
     grueData= {
         images: [
             "assets/img/Grue-left1.png",
@@ -26,6 +30,8 @@ function init(board) {
             "assets/img/Grue-right-eating.png",
             "assets/img/Grue-towards-eating.png",
             "assets/img/Grue-away-eating.png",
+            "assets/img/Grue-towards-love.png",
+            "assets/img/Grue-towards-aftereating.png",
         ],
         frames: [
             [0, 0, 64, 64, 0],
@@ -41,6 +47,8 @@ function init(board) {
             [0, 0, 128, 128, 9],
             [0, 0, 128, 128, 10],
             [0, 0, 128, 128, 11],
+            [0, 0, 128, 128, 12],
+            [0, 0, 128, 128, 13],
         ],
         animations : {
             walkLeft: { frames: [0, 1] },
@@ -56,7 +64,10 @@ function init(board) {
             eatLeft: { frames: [8] },
             eatRight: { frames: [9] },
             eatDown: { frames: [10] },
-            eatUp: { frames: [11] }
+            eatUp: { frames: [11] },
+            eatDownAfter: { frames: [13] },
+
+            love: { frames: [12] }
         },
         framerate: 5
     }
@@ -233,7 +244,35 @@ window.Grue = {
     },
     add_boundary: function(boundary) {
         boundaries.push(boundary);
+    },
+    end_game: function(container) {
+        thonSprite = new createjs.Sprite(grueSpriteSheet, "idleDown");
+        thonSprite.x = 500;
+        thonSprite.y = 10;
+        container.addChild(thonSprite);
+        grueSprite.gotoAndPlay("love");
+        createjs.Tween.get(grueSprite).to({x: 500, y: 90}, 2000).call(function() {
+            thonSprite.gotoAndPlay("eatDown");
+            createjs.Tween.get(thonSprite).to({y: 100}, 1000).call(function() {
+                thonSprite.gotoAndPlay("eatDownAfter");
+            }).call(function() {
+                stage.removeChild(grueSprite);
+                setTimeout(function() {
+                    thonSprite.y += 30;
+                    thonSprite.x += 30;
+                    thonSprite.gotoAndPlay("idleDown");
+                    setTimeout(function() {
+                        thonSprite.gotoAndPlay("walkUp");
+                        createjs.Tween.get(thonSprite).to({y: -100}, 1000).call(function() {
+                            container.removeChild(thonSprite);
+                        });
+                    }, 1000);
+
+                }, 1000);
+            });
+        });
     }
 }
 
 })();
+

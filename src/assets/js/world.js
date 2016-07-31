@@ -129,6 +129,9 @@ window.World = {
                 createjs.Tween.get(c).to({x : x, y : y}, spd || 10, createjs.Ease.linear);
             }
         }
+    },
+    end_game: function() {
+        Grue.end_game(board);
     }
 };
 
