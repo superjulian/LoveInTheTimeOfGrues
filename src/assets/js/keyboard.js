@@ -1,23 +1,17 @@
 (function() {
 "use strict";
 
-var registered = false;
-
-function register(handlers) {
-    if (registered) {
-        throw Error("Already registered keyboard handlers!");
-    }
-    registered = true;
-    window.document.onkeydown = function(event) {
-        var func = handlers[event.keyCode];
-        if (func) {
-            func(event);
-        }
-    }
+var keyBoardState= { };
+window.document.onkeydown = function(event) {
+    keyBoardState[event.keyCode]=true;
+}
+window.document.onkeyup = function(event) {
+    keyBoardState[event.keyCode]=false;
 }
 
+
 window.Keyboard = {
-    register: register,
+    state: keyBoardState,
     LEFT: 37,
     RIGHT: 39,
     UP: 38,

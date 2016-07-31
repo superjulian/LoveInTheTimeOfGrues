@@ -102,11 +102,12 @@ function load(path) {
         Object.keys(containers).forEach(function(k) {
             containers[k].regX = pos.x / 2;
             containers[k].regY = pos.y;
-            containers[k].cache(0, 0, event.size.width, event.size.height);
+            containers[k].cache(0, 0, event.result.size.width, event.result.size.height);
         });
     });
     preload.loadFile(path);
 }
+
 
 window.World = {
     init: init,

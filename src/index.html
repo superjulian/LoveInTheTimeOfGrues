@@ -28,16 +28,6 @@
     <body>
         <canvas id="world" width="1024" height="1024"></canvas>
 
-        <!-- Put keybindings here -->
-        <script>
-            var keyhandlers = {}
-            keyhandlers[Keyboard.UP] = function() { console.log("UP"); Grue.move(0,-1); };
-            keyhandlers[Keyboard.DOWN] = function() { console.log("DOWN"); Grue.move(0, 1); };
-            keyhandlers[Keyboard.LEFT] = function() { console.log("LEFT"); Grue.move(-1, 0); };
-            keyhandlers[Keyboard.RIGHT] = function() { console.log("RIGHT"); Grue.move(1, 0); };
-            keyhandlers[Keyboard.SPACE] = function() { console.log("SPACE")};
-        </script>
-
         <script>
             var stage;
             // var g = new createjs.Graphics();
@@ -45,34 +35,18 @@
 
             // var s = new createjs.Shape(foo);
             document.addEventListener('DOMContentLoaded', function() {
-                Keyboard.register(keyhandlers);
+                console.log("!");
+                var stage = new createjs.Stage("world");
                 stage = new createjs.Stage("world");
-
-                createjs.Ticker.on("tick", handleTick);
                 World.init(stage);
                 World.load("/assets/map/level_1.json");
-
-                /*
-                var box = new createjs.Shape();
-                box.graphics.beginLinearGradientFill(
-                    ["#000000", "rgba(0, 0, 0, 0)"], [0, 1], 0, 0, 1000, 2000)
-                box.graphics.drawRect(0, 0, 1000, 2000);
-                box.cache(0, 0, 1000, 2000);
-
-                box.filters = [
-                    //new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0),
-                    new createjs.BlurFilter(5, 5, 10)
-                    //new createjs.AlphaMaskFilter(box.cacheCanvas)
-                ]
-                //foo.cache(0, 0, 1000, 1000);
-                stage.cache(0, 0, 1000, 1000);
-                stage.addChild(box);
-                */
-
+                createjs.Ticker.setFPS(30);
+                createjs.Ticker.addEventListener("tick", handleTick);
                 function handleTick(event) {
                     stage.canvas.width = window.innerWidth;
-                    stage.canvas.height = window.innerHeight;
-                    stage.update(event);
+                    stage.canvas.height = window.innerHeight; 
+                    Grue.tick();
+		    stage.update(event);
                 }
             }, false);
         </script>
