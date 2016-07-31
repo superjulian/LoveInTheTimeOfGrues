@@ -7,11 +7,11 @@ var grueSprite;
 
 function init(board) {
     grueData= {
-	    images: ["assets/img/circ-brown.png", "assets/img/circ-blue.png","assets/img/circ-green.png","assets/img/circ-red.png"],
+	    images: ["assets/img/circ-brown.png"], //, "assets/img/circ-blue.png","assets/img/circ-green.png","assets/img/circ-red.png"],
     	frames: {width:64, height:64 },
     	animations : {
-            redGreen: [2, 3, "blueBrown"],
-            blueBrown: [0, 1, "redGreen"]
+            redGreen: [0],
+            blueBrown: [0]
         }
     }
     grueSpriteSheet = new createjs.SpriteSheet(grueData);

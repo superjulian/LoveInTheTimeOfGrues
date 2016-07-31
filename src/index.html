@@ -1,5 +1,8 @@
 <html>
     <head>
+        <!-- Load libraries -->
+        <script src="/assets/js/perlin.js"></script>
+
         <!-- Load createjs assets -->
         <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
         <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
@@ -11,9 +14,22 @@
         <script src="/assets/js/adventurer.js"></script>
         <script src="/assets/js/keyboard.js"></script>
         <script src="/assets/js/world.js"></script>
+        <style>
+            body {
+                overflow: hidden;
+            }
+
+            canvas {
+                top: -1px;
+                left: -1px;
+                position: absolute;
+                width: 2049px;
+                height: 1128px;
+            }
+        </style>
     </head>
     <body>
-        <canvas id="world" width="800" height="800"></canvas>
+        <canvas id="world" width="2049" height="1025"></canvas>
 
         <!-- Put keybindings here -->
         <script>
@@ -26,16 +42,39 @@
         </script>
 
         <script>
+            var stage;
+            // var g = new createjs.Graphics();
+            // var foo = g.beginLinearGradientFill(["#000","#FFF"], [0, 1], 0, 20, 0, 120).drawRect(20, 20, 120, 120);
+
+            // var s = new createjs.Shape(foo);
             document.addEventListener('DOMContentLoaded', function() {
-                console.log("!");
                 Keyboard.register(keyhandlers);
-                var stage = new createjs.Stage("world");
-                // World.load("/assets/map/level_1.json", stage, {"tree": [grueSpriteSheet]});
+                stage = new createjs.Stage("world");
 
                 createjs.Ticker.on("tick", handleTick);
                 World.init(stage);
+                World.load("/assets/map/level_1.json");
+
+                /*
+                var box = new createjs.Shape();
+                box.graphics.beginLinearGradientFill(
+                    ["#000000", "rgba(0, 0, 0, 0)"], [0, 1], 0, 0, 1000, 2000)
+                box.graphics.drawRect(0, 0, 1000, 2000);
+                box.cache(0, 0, 1000, 2000);
+
+                box.filters = [
+                    //new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0),
+                    new createjs.BlurFilter(5, 5, 10)
+                    //new createjs.AlphaMaskFilter(box.cacheCanvas)
+                ]
+                //foo.cache(0, 0, 1000, 1000);
+                stage.cache(0, 0, 1000, 1000);
+                stage.addChild(box);
+                */
 
                 function handleTick(event) {
+                    stage.canvas.width = window.innerWidth;
+                    stage.canvas.height = window.innerHeight;
                     stage.update(event);
                 }
             }, false);
