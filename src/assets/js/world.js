@@ -112,7 +112,8 @@ function load(path) {
 window.World = {
     init: init,
     load: load,
-    containers: containers
+    containers: containers,
+    world: function (){return board}
 };
 
 })();
