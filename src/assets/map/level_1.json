@@ -3,9 +3,35 @@
         "width": 2048,
         "height": 2048
     },
+    "text" : [
+        "look tree",
+        "look rock",
+        "take tree",
+        "inventory",
+        "say 'hi'",
+        "look north",
+        "score",
+        "help",
+        "look south",
+        "look east",
+        "look west",
+        "zork?"
+    ],
     "poi" : [
-        {"type" : "gate", "id" : "east_gate", "x" : 800, "y" : 400, "waypoints" : [{"x" : 400, "y" : 400}, "west_gate"]},
-        {"type" : "gate", "id" : "west_gate", "x" : 0, "y" : 400, "waypoints" : ["east_gate"]}
+        {
+            "type" : "gate",
+            "id" : "east_gate",
+            "x" : 800,
+            "y" : 400,
+            "waypoints" : [{"x" : 100, "y" : 400}, {"x" : 200, "y" : 400}, {"x" : 400, "y" : 400}, {"x" : 600, "y" : 400}, "west_gate"]
+        },
+        {
+            "type" : "gate",
+            "id" : "west_gate",
+            "x" : 1000,
+            "y" : 400,
+            "waypoints" : [{"x" : 600, "y" : 400}, {"x" : 400, "y" : 400}, {"x" : 200, "y" : 400}, {"x" : 100, "y" : 400}, "east_gate"]
+        }
     ],
     "boundary" : [
         [-100, 0, 0, 2048, -1, null],
