@@ -114,6 +114,7 @@ window.World = {
     init: init,
     load: load,
     containers: containers,
+    world: function (){return board},
     dim : function() { return data.size; },
     position: function() {
         return {x : containers["ground0"].x, y : containers["ground0"].y};
