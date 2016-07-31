@@ -105,11 +105,10 @@ function load(path) {
 
         data = event.result;
         var pos = Grue.position();
-        World.set_position(pos.x, pos.y, true);
+        World.set_position(-pos.x, -pos.y, true);
     });
     preload.loadFile(path);
 }
-
 
 window.World = {
     init: init,
@@ -119,16 +118,17 @@ window.World = {
     position: function() {
         return {x : containers["ground0"].x, y : containers["ground0"].y};
     },
-    set_position: function(x, y, immediate) {
-        Object.keys(containers).forEach(function(k) {
-            var c = containers[k];
+    set_position: function(x, y, immediate, spd) {
+        let keys = Object.keys(containers);
+        for (let i = 0; i < keys.length; i++) {
+            var c = containers[keys[i]];
             if (immediate) {
-                c.x = -x;
-                c.y = -y;
+                c.x = x;
+                c.y = y;
             } else {
-                createjs.Tween.get(c).to({x : x, y : y}, 10, createjs.Ease.linear);
+                createjs.Tween.get(c).to({x : x, y : y}, spd || 10, createjs.Ease.linear);
             }
-        });
+        }
     }
 };
 
