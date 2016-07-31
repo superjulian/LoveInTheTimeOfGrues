@@ -2,6 +2,7 @@
 "use strict";
 
 var board = null;
+var containers = {};
 
 const tileset = {
     tree: [
@@ -29,21 +30,20 @@ function init(stage) {
     board = stage;
 }
 
-function fill(item, tileset) {
+function fill(item, tileset, container, size) {
     var newitems = [];
     var tiles = tileset[item.fill];
 
     if (item.density === 1) {
-        var cx = 2048 / tiles[0]._frameWidth,
-            cy = 1024 / tiles[0]._frameHeight;
+        var cx = tiles[0]._frameWidth,
+            cy = tiles[0]._frameHeight;
 
-        for (let i = 0; i < cx; i++) {
-            for (let j = 0; j < cx; j++) {
+        for (let i = 0; i < 2*size.height; i+=cy) {
+            for (let j = 0; j < 2*size.width; j+=cx) {
                 let index = Math.floor(Math.random()*tiles.length),
                     sprite = new createjs.Sprite(tiles[index]);
-                sprite.x = i * tiles[0]._frameWidth;
-                sprite.y = j * tiles[0]._frameHeight;
-                window.foo = sprite;
+                sprite.x = j;
+                sprite.y = i;
                 newitems.push(sprite);
             }
         }
@@ -51,48 +51,58 @@ function fill(item, tileset) {
         for (let i = item.min_x; i < item.max_x; i += item.bound) {
             for (let j = item.min_y; j < item.max_y; j += item.bound) {
                 let n = Math.abs(noise.simplex2(i / item.bound, j / item.bound));
-                console.log(n);
                 if (n < item.density) {
                     var index = Math.floor(Math.random()*tiles.length),
                         sprite = new createjs.Sprite(tiles[index]);
                     sprite.x = i;
                     sprite.y = j;
                     sprite.shadow = new createjs.Shadow("rgba(0,0,0,.9)", 10, 10, 100);
-                    window.foo = sprite;
                     newitems.push(sprite);
                 }
             }
         }
+        newitems.sort(sort_y);
     }
-    newitems.sort(sort_y);
-    board.addChild.apply(board, newitems);
+    container.addChild.apply(container, newitems);
 }
 
-function create(item, tileset, at) {
+function create(item, tileset, container) {
     var tiles = tileset[item.type];
     var index = Math.floor(Math.random()*tiles.length);
     var sprite = new createjs.Sprite(tiles[index]);
     sprite.x = item.x;
     sprite.y = item.y;
-    if (at) {
-        board.addChildAt(sprite, at);
-    } else {
-        board.addChild(sprite);
-    }
-    board.update();
+    container.addChild(sprite);
+    container.update();
 }
 
 function load(path) {
     var preload = new createjs.LoadQueue();
     preload.addEventListener("fileload", function(event) {
         event.result.scenery.forEach(function(item) {
+            var container = board;
+            if (item.layer) {
+                container = containers[item.layer];
+                if (container === undefined) {
+                    container = new createjs.Container();
+                    containers[item.layer] = container;
+                    board.addChild(container);
+                }
+            }
             if (item.type === "grue") {
                 Grue.show(item.x, item.y, board);
             } else if (item.type === "fill") {
-                fill(item, tileset);
+                fill(item, tileset, container, event.result.size);
             } else {
-                create(item, tileset);
+                create(item, tileset, container);
             }
+        });
+
+        var pos = Grue.position();
+        Object.keys(containers).forEach(function(k) {
+            containers[k].regX = pos.x / 2;
+            containers[k].regY = pos.y;
+            containers[k].cache(0, 0, event.size.width, event.size.height);
         });
     });
     preload.loadFile(path);
@@ -100,7 +110,8 @@ function load(path) {
 
 window.World = {
     init: init,
-    load: load
+    load: load,
+    containers: containers
 };
 
 })();

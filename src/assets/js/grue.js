@@ -53,6 +53,9 @@ window.Grue = {
         grueSprite.x = x;
         grueSprite.y = y;
         board.addChild(grueSprite);
+    },
+    position: function() {
+        return {x : grueSprite.x, y : grueSprite.y};
     }
 }
 
