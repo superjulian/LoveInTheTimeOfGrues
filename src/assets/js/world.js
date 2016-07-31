@@ -86,7 +86,9 @@ function load(path) {
     var preload = new createjs.LoadQueue();
     preload.addEventListener("fileload", function(event) {
         event.result.scenery.forEach(function(item) {
-            if (item.type === "fill") {
+            if (item.type === "grue") {
+                Grue.show(item.x, item.y, board);
+            } else if (item.type === "fill") {
                 fill(item, tileset);
             } else {
                 create(item, tileset);

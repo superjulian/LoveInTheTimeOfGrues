@@ -34,10 +34,10 @@
         <!-- Put keybindings here -->
         <script>
             var keyhandlers = {}
-            keyhandlers[Keyboard.UP] = function() { console.log("UP"); Grue.move(0,1) };
-            keyhandlers[Keyboard.DOWN] = function() { console.log("DOWN"); Grue.move(0,-1) };
-            keyhandlers[Keyboard.LEFT] = function() { console.log("LEFT"); Grue.move(-1, 0)};
-            keyhandlers[Keyboard.RIGHT] = function() { console.log("RIGHT"); Grue.move(1, 0) };
+            keyhandlers[Keyboard.UP] = function() { console.log("UP"); Grue.move(0,-1); };
+            keyhandlers[Keyboard.DOWN] = function() { console.log("DOWN"); Grue.move(0, 1); };
+            keyhandlers[Keyboard.LEFT] = function() { console.log("LEFT"); Grue.move(-1, 0); };
+            keyhandlers[Keyboard.RIGHT] = function() { console.log("RIGHT"); Grue.move(1, 0); };
             keyhandlers[Keyboard.SPACE] = function() { console.log("SPACE")};
         </script>
 
