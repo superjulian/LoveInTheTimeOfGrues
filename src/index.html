@@ -31,7 +31,6 @@
     <body>
         <canvas id="world" width="2049" height="1025"></canvas>
 
-
         <script>
             var stage;
             // var g = new createjs.Graphics();
@@ -41,40 +40,17 @@
             document.addEventListener('DOMContentLoaded', function() {
                 console.log("!");
                 var stage = new createjs.Stage("world");
-                //World.load("/assets/map/level_1.json", stage, {"tree": [grueSpriteSheet]});
-		
+                stage = new createjs.Stage("world");
                 World.init(stage);
-
                 World.load("/assets/map/level_1.json");
                 createjs.Ticker.setFPS(30);
                 createjs.Ticker.addEventListener("tick", handleTick);
                 function handleTick(event) {
-                        Grue.tick();
-		        stage.update(event);
-
-                //World.init(stage);
-
-
-                /*
-                var box = new createjs.Shape();
-                box.graphics.beginLinearGradientFill(
-                    ["#000000", "rgba(0, 0, 0, 0)"], [0, 1], 0, 0, 1000, 2000)
-                box.graphics.drawRect(0, 0, 1000, 2000);
-                box.cache(0, 0, 1000, 2000);
-
-                box.filters = [
-                    //new createjs.ColorFilter(0, 0, 0, 1, 255, 0, 0),
-                    new createjs.BlurFilter(5, 5, 10)
-                    //new createjs.AlphaMaskFilter(box.cacheCanvas)
-                ]
-                //foo.cache(0, 0, 1000, 1000);
-                stage.cache(0, 0, 1000, 1000);
-                stage.addChild(box);
-                */
+                    stage.canvas.width = window.innerWidth;
+                    stage.canvas.height = window.innerHeight; 
+                    Grue.tick();
+		    stage.update(event);
                 }
-                    //stage.canvas.width = window.innerWidth;
-                    //stage.canvas.height = window.innerHeight;
-                
             }, false);
         </script>
     </body>

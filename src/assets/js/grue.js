@@ -12,7 +12,7 @@ var idle=true;
 function init(board) {
     console.log("grue");
     grueData= {
-	images: [
+    images: [
             "assets/img/Grue-left1.png",
             "assets/img/Grue-left2.png",
             "assets/img/Grue-right1.png",
@@ -36,6 +36,7 @@ function init(board) {
         },
         framerate: 5
     }
+
     grueSpriteSheet = new createjs.SpriteSheet(grueData);
     grueSprite = new createjs.Sprite(grueSpriteSheet, "idleDown");
     board.addChild(grueSprite);
@@ -85,7 +86,9 @@ function tick (){
                 }
 		createjs.Tween.get(grueSprite).to({ x: grueSprite.x + (7 * xCo), y: grueSprite.y+(7 * yCo)  }, 3, createjs.Ease.linear).call(function() {xCo=0; yCo=0});	
 	}
+
 }
+
 
 function gulp(){
 	inGulp=true;
@@ -124,7 +127,6 @@ function gulp(){
 window.Grue = {
 	init: init,
 	tick: tick,
-	//move: grueMove,
         show: function(x, y, board) {
                 grueSprite.x = x;
                 grueSprite.y = y;

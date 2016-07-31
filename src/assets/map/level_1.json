@@ -7,12 +7,13 @@
         {"type" : "fill", "fill" : "ground", "density" : 1},
         {"type" : "fill", "fill" : "grass", "density" : 0.01, "bound" : 64, "min_x" : -32, "max_x" : 2048, "min_y" : -32, "max_y" : 2048},
 
-        {"type" : "fill", "fill" : "tree", "density" : 0.01, "bound" : 32, "min_x" : -32, "max_x" : 600, "min_y" : -128, "max_y" : 300},
-        {"type" : "fill", "fill" : "tree", "density" : 0.01, "bound" : 32, "min_x" : 1000, "max_x" : 2048, "min_y" : -128, "max_y" : 300},
+
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -32, "max_x" : 600, "min_y" : -128, "max_y" : 300},
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 1000, "max_x" : 2048, "min_y" : -128, "max_y" : 300},
 
         {"type" : "grue", "x" : 30, "y" : 600},
 
-        {"type" : "fill", "fill" : "tree", "density" : 0.01, "bound" : 32, "min_x" : -32, "max_x" : 300, "min_y" : 600, "max_y" : 1024},
-        {"type" : "fill", "fill" : "tree", "density" : 0.01, "bound" : 32, "min_x" : 800, "max_x" : 2048, "min_y" : 600, "max_y" : 1024}
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -32, "max_x" : 300, "min_y" : 600, "max_y" : 1024},
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 800, "max_x" : 2048, "min_y" : 600, "max_y" : 1024}
     ]
 }
