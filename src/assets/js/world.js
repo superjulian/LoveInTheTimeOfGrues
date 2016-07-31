@@ -1,6 +1,7 @@
 (function() {
 "use strict";
 
+var data = null;
 var board = null;
 var containers = {};
 
@@ -79,6 +80,9 @@ function create(item, tileset, container) {
 function load(path) {
     var preload = new createjs.LoadQueue();
     preload.addEventListener("fileload", function(event) {
+        event.result.boundary.forEach(function(item) {
+            Grue.add_boundary(item);
+        });
         event.result.scenery.forEach(function(item) {
             var container = board;
             if (item.layer) {
@@ -93,17 +97,15 @@ function load(path) {
                 Grue.show(item.x, item.y, board);
             } else if (item.type === "fill") {
                 fill(item, tileset, container, event.result.size);
+                container.cache(0, 0, event.result.size.width, event.result.size.height);
             } else {
                 create(item, tileset, container);
             }
         });
 
+        data = event.result;
         var pos = Grue.position();
-        Object.keys(containers).forEach(function(k) {
-            containers[k].regX = pos.x / 2;
-            containers[k].regY = pos.y;
-            containers[k].cache(0, 0, event.result.size.width, event.result.size.height);
-        });
+        World.set_position(pos.x, pos.y, true);
     });
     preload.loadFile(path);
 }
@@ -112,7 +114,23 @@ function load(path) {
 window.World = {
     init: init,
     load: load,
-    containers: containers
+    containers: containers,
+    dim : function() { return data.size; },
+    position: function() {
+        return {x : containers["ground0"].x, y : containers["ground0"].y};
+    },
+    set_position: function(x, y, immediate) {
+        Object.keys(containers).forEach(function(k) {
+            var c = containers[k];
+            if (immediate) {
+                c.x = -x;
+                c.y = -y;
+            } else {
+                createjs.Tween.get(c).to({x : x, y : y}, 10, createjs.Ease.linear);
+            }
+        });
+    }
 };
 
 })();
+

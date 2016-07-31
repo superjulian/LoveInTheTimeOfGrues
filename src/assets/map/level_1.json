@@ -7,6 +7,17 @@
         {"type" : "gate", "id" : "east_gate", "x" : 800, "y" : 400, "waypoints" : [{"x" : 400, "y" : 400}, "west_gate"]},
         {"type" : "gate", "id" : "west_gate", "x" : 0, "y" : 400, "waypoints" : ["east_gate"]}
     ],
+    "boundary" : [
+        [-100, 0, 0, 2048, -1, null],
+        [1100, 1200, 0, 2048, 1, null],
+        [0, 1200, -100, 0, null, -1],
+        [0, 1200, 950, 1050, null, 1],
+
+        [-100, 430, -100, 410, -1, -1],
+        [-100, 550, 500, 2048, -1, 1],
+        [620, 1000, 500, 2048, 1, 1],
+        [620, 1000, 0, 430, 1, -1]
+    ],
     "scenery" : [
         {"type" : "fill", "fill" : "ground", "density" : 1, "layer" : "ground0"},
         {"type" : "fill", "fill" : "grass", "density" : 0.01, "bound" : 64, "min_x" : -64, "max_x" : 2048, "min_y" : -64, "max_y" : 2048, "layer" : "ground0"},
@@ -14,7 +25,8 @@
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 768, "min_y" : -64, "max_y" : 600, "layer" : "ground1"},
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 600, "min_y" : 600, "max_y" : 700, "layer" : "ground1"},
 
-        {"type" : "grue", "x" : 950, "y" : 500},
+        {"type" : "grue", "x" : 600, "y" : 400},
+
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 732, "max_x" : 768, "min_y" : 732, "max_y" : 768, "layer" : "ground2"},
 
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 1280, "max_x" : 2048, "min_y" : -32, "max_y" : 768, "layer" : "ground1"},
