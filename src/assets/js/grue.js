@@ -6,7 +6,7 @@ var grueData;
 var grueSpriteSheet;
 var thonSprite;
 var grueSprite;
-var inGulp=false;
+var gulp=false;
 var xCo=0;
 var yCo=0;
 var facing="";
@@ -107,73 +107,92 @@ function check_out_of_bounds(x, y, xCo, yCo) {
 }
 
 function tick () {
-    if (inGulp===true) {
-        return;
-    }
-
     if (Keyboard.state[Keyboard.SPACE]) {
         xCo=0;
         yCo=0;
-        // gulp();
+        idle=false;
         if (facing=="Left") {
             xCo=-1;
             yCo=0;
             grueSprite.gotoAndPlay("eatLeft");
-            idle=false;
+            if (!gulp) {
+                grueSprite.y -= 32;
+                gulp=true;
+            }
         } else if (facing=="Right") {
             xCo=1;
             yCo=0;
             grueSprite.gotoAndPlay("eatRight");
-            idle=false;
+            if (!gulp) {
+                grueSprite.y -= 32;
+                gulp=true;
+            }
         } else if (facing=="Down") {
             xCo=0;
             yCo=1;
             grueSprite.gotoAndPlay("eatDown");
-            idle=false;
+            if (!gulp) {
+                grueSprite.x -= 32;
+                gulp=true;
+            }
         } else if (facing=="Up") {
             xCo=0;
             yCo=-1;
             grueSprite.gotoAndPlay("eatUp");
-            idle=false;
+            if (!gulp) {
+                grueSprite.x -= 32;
+                gulp=true;
+            }
         }
-    } else if (Keyboard.state[Keyboard.LEFT]){
-        xCo=-1;
-        yCo=0;
-        if (facing!="Left" || idle){
-            facing="Left";
-            grueSprite.gotoAndPlay("walkLeft");
-            idle=false;
+    } else {
+        if (gulp) {
+            if (facing=="Left") {
+                grueSprite.y += 32;
+            } else if (facing=="Right") {
+                grueSprite.y += 32;
+            } else if (facing=="Up") {
+                grueSprite.x += 32;
+            } else if (facing=="Down") {
+                grueSprite.x += 32;
+            }
+            gulp=false;
         }
-    } else if (Keyboard.state[Keyboard.RIGHT]){
-        xCo=1;
-        yCo=0;
-        if (facing!="Right"|| idle){
-            grueSprite.gotoAndPlay("walkRight");
-            facing="Right";
-            idle=false;
+        idle=false;
+        if (Keyboard.state[Keyboard.LEFT]){
+            xCo=-1;
+            yCo=0;
+            if (facing!="Left" || idle){
+                facing="Left";
+                grueSprite.gotoAndPlay("walkLeft");
+            }
+        } else if (Keyboard.state[Keyboard.RIGHT]){
+            xCo=1;
+            yCo=0;
+            if (facing!="Right"|| idle){
+                grueSprite.gotoAndPlay("walkRight");
+                facing="Right";
+            }
+        } else if (Keyboard.state[Keyboard.UP]){
+            yCo=-1;
+            xCo=0;
+            if (facing!="Up"|| idle){
+                facing="Up";
+                grueSprite.gotoAndPlay("walkUp");
+            }
+        } else if (Keyboard.state[Keyboard.DOWN]){
+            yCo=1;
+            xCo=0;
+            if (facing!="Down" || idle){
+                facing="Down";
+                grueSprite.gotoAndPlay("walkDown");
+            }
         }
-    } else if (Keyboard.state[Keyboard.UP]){
-        yCo=-1;
-        xCo=0;
-        if (facing!="Up"|| idle){
-            facing="Up";
-            grueSprite.gotoAndPlay("walkUp");
-            idle=false;
+        else {
+            yCo=0;
+            xCo=0;
+            grueSprite.gotoAndPlay("idle"+facing);
+            idle=true;
         }
-    } else if (Keyboard.state[Keyboard.DOWN]){
-        yCo=1;
-        xCo=0;
-        if (facing!="Down" || idle){
-            facing="Down";
-            grueSprite.gotoAndPlay("walkDown");
-            idle=false;
-        }
-    }
-    else {
-        yCo=0;
-        xCo=0;
-        grueSprite.gotoAndPlay("idle"+facing);
-        idle=true;
     }
 
     if (xCo !== 0 || yCo !== 0) {
@@ -186,6 +205,7 @@ function tick () {
     }
 }
 
+/*
 function gulp(){
     inGulp=true;
     var num=30;
@@ -246,6 +266,7 @@ function gulp(){
             inGulp=false
         });
 }
+*/
 
 window.Grue = {
     init: init,
