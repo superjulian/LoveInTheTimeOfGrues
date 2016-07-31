@@ -111,14 +111,32 @@ function tick () {
         return;
     }
 
-    if (Keyboard.state[Keyboard.SPACE]){
+    if (Keyboard.state[Keyboard.SPACE]) {
         xCo=0;
         yCo=0;
-        gulp();
-        idle=true;
-        return;
-    }
-    else if (Keyboard.state[Keyboard.LEFT]){
+        // gulp();
+        if (facing=="Left") {
+            xCo=-1;
+            yCo=0;
+            grueSprite.gotoAndPlay("eatLeft");
+            idle=false;
+        } else if (facing=="Right") {
+            xCo=1;
+            yCo=0;
+            grueSprite.gotoAndPlay("eatRight");
+            idle=false;
+        } else if (facing=="Down") {
+            xCo=0;
+            yCo=1;
+            grueSprite.gotoAndPlay("eatDown");
+            idle=false;
+        } else if (facing=="Up") {
+            xCo=0;
+            yCo=-1;
+            grueSprite.gotoAndPlay("eatUp");
+            idle=false;
+        }
+    } else if (Keyboard.state[Keyboard.LEFT]){
         xCo=-1;
         yCo=0;
         if (facing!="Left" || idle){
@@ -126,8 +144,7 @@ function tick () {
             grueSprite.gotoAndPlay("walkLeft");
             idle=false;
         }
-    }
-    else if (Keyboard.state[Keyboard.RIGHT]){
+    } else if (Keyboard.state[Keyboard.RIGHT]){
         xCo=1;
         yCo=0;
         if (facing!="Right"|| idle){
@@ -135,8 +152,7 @@ function tick () {
             facing="Right";
             idle=false;
         }
-    }
-    else if (Keyboard.state[Keyboard.UP]){
+    } else if (Keyboard.state[Keyboard.UP]){
         yCo=-1;
         xCo=0;
         if (facing!="Up"|| idle){
@@ -144,7 +160,7 @@ function tick () {
             grueSprite.gotoAndPlay("walkUp");
             idle=false;
         }
-    }else if (Keyboard.state[Keyboard.DOWN]){
+    } else if (Keyboard.state[Keyboard.DOWN]){
         yCo=1;
         xCo=0;
         if (facing!="Down" || idle){
