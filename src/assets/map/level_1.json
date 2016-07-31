@@ -15,7 +15,8 @@
         "look south",
         "look east",
         "look west",
-        "zork?"
+        "zork?",
+        "xyzzy"
     ],
     "poi" : [
         {
