@@ -6,7 +6,7 @@ var board = null;
 var containers = {};
 var advs=[];
 
-var epsilon = 3;
+var epsilon = 100;
 
 const tileset = {
     tree: [
@@ -28,10 +28,15 @@ function tick (){
                     advs.push(Adventurer.make(data.poi[0], containers["adv"]));
                 }
         }
+        if (!World.over && World.score >= 3) {
+            World.end_game();
+            World.over = true;
+        }
         advs.forEach(function(adv) {
             var pos = Grue.position(),
-                dx = pos.x - adv.sprite.x,
-                dy = pos.y - adv.sprite.y;
+                dx = Math.abs(2*pos.x - adv.sprite.x),
+                dy = Math.abs(2*pos.y - adv.sprite.y);
+            console.log(dx, dy);
             if (dx < epsilon && dy < epsilon) {
                 if (adv.light === "On") {
                     Grue.die();
@@ -41,6 +46,7 @@ function tick (){
                     if (index > -1) {
                         advs.splice(index, 1);
                     }
+                    World.score += 1;
                 } else {
                     Grue.die();
                 }
@@ -186,7 +192,9 @@ window.World = {
         Grue.end_game(board);
     },
     tick: tick,
-    has_action: false
+    has_action: false,
+    score: 0,
+    over: false
 };
 
 })();
