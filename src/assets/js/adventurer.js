@@ -76,7 +76,13 @@ function init (board){
 }
 window.Adventurer = {
         init: init,
-        make: Adventurer 
+        make: function (gate, board){
+               var adv= new Adventurer ();
+               adv.gate=gate;
+               adv.show(gate.x, gate.y, board);
+               console.log(gate.x, gate.y, gate);
+               return adv; 
+        }
 
 }
 })();

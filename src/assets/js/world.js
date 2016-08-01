@@ -4,7 +4,7 @@
 var data = null;
 var board = null;
 var containers = {};
-
+var advs=[];
 const tileset = {
     tree: [
         new createjs.SpriteSheet({ images: ["/assets/img/Tree1.png"], frames: { width: 128, height: 192 }}),
@@ -19,6 +19,13 @@ const tileset = {
         new createjs.SpriteSheet({ images: ["/assets/img/grass-blank.png"], frames: { width: 64, height: 64 }}),
     ]
 };
+function tick (){
+        if (advs.length < 3){
+                if (data) {
+                advs.push(Adventurer.make(data.poi[0], board));
+                }
+        }
+}
 
 function sort_y(a, b) {
     if (a.y > b.y) return 1;
@@ -103,9 +110,9 @@ function load(path) {
             }
         });
 
-        data = event.result;
         var pos = Grue.position();
         World.set_position(-pos.x, -pos.y, true);
+        data = event.result;
     });
     preload.loadFile(path);
 }
@@ -133,7 +140,8 @@ window.World = {
     },
     end_game: function() {
         Grue.end_game(board);
-    }
+    },
+    tick: tick
 };
 
 })();
