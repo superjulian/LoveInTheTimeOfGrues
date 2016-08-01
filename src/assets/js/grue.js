@@ -72,7 +72,7 @@ function init(board) {
             eatDownAfter: { frames: [13] },
 
             love: { frames: [12] },
-            dead: { frames: [14, 15] },
+            dead: { frames: [14] },
         },
         framerate: 5
     }

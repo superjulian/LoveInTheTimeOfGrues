@@ -23,14 +23,18 @@ const tileset = {
     ]
 };
 function tick (){
+        if (World.over) { return; }
         if (World.has_action && advs.length < 1){
                 if (data) {
                     advs.push(Adventurer.make(data.poi[0], containers["adv"]));
                 }
         }
         if (!World.over && World.score >= 3) {
-            World.end_game();
             World.over = true;
+            setTimeout(function() {
+                World.end_game();
+            }, 1000);
+            return;
         }
         advs.forEach(function(adv) {
             var pos = Grue.position(),
