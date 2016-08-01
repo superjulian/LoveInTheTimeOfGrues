@@ -47,9 +47,9 @@ function init (board){
     var advData= {
     images: [
             imgPfx+"left1-lightON.png",
-            imgPfx+"left1-lightON.png",
+            imgPfx+"left1-lightOFF.png",
             imgPfx+"left2-lightON.png",
-            imgPfx+"left2-lightON.png",
+            imgPfx+"left2-lightOFF.png",
             imgPfx+"right1-lightON.png",
             imgPfx+"right1-lightOFF.png",
             imgPfx+"right2-lightON.png",
@@ -61,7 +61,7 @@ function init (board){
             imgPfx+"away1-lightON.png",
             imgPfx+"away2-lightOFF.png"
     ],
-    frames : { width: 64, height: 64, count: 8},
+    frames : { width: 128, height: 128, count: 8},
     animations: {
             walkLeft: { frames: [0, 1] },
             walkRight: { frames: [2, 3] },
