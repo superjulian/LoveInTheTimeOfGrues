@@ -32,6 +32,8 @@ function init(board) {
             "assets/img/Grue-away-eating.png",
             "assets/img/Grue-towards-love.png",
             "assets/img/Grue-towards-aftereating.png",
+            "assets/img/Grue-dead.png",
+            "assets/img/Grue-smoke.png",
         ],
         frames: [
             [0, 0, 64, 64, 0],
@@ -49,6 +51,8 @@ function init(board) {
             [0, 0, 128, 128, 11],
             [0, 0, 128, 128, 12],
             [0, 0, 128, 128, 13],
+            [0, 0, 128, 128, 14],
+            [0, 0, 128, 128, 15],
         ],
         animations : {
             walkLeft: { frames: [0, 1] },
@@ -67,7 +71,8 @@ function init(board) {
             eatUp: { frames: [11] },
             eatDownAfter: { frames: [13] },
 
-            love: { frames: [12] }
+            love: { frames: [12] },
+            dead: { frames: [14, 15] },
         },
         framerate: 5
     }
@@ -305,11 +310,12 @@ window.Grue = {
                             container.removeChild(thonSprite);
                         });
                     }, 1000);
-
                 }, 1000);
             });
         });
-    }
+    },
+    grueSprite: function() { return grueSprite; },
+    die: function() { grueSprite.gotoAndPlay("dead"); }
 }
 
 })();

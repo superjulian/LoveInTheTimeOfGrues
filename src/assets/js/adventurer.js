@@ -12,7 +12,7 @@ Adventurer.prototype.show= function (x, y, targ){
         this.sprite.y = y;
         this.moving = false;
         this.facing = "Down";
-        this.light="ON";
+        this.light="On";
         targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){

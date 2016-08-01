@@ -6,6 +6,8 @@ var board = null;
 var containers = {};
 var advs=[];
 
+var epsilon = 3;
+
 const tileset = {
     tree: [
         new createjs.SpriteSheet({ images: ["/assets/img/Tree1.png"], frames: { width: 128, height: 192 }}),
@@ -27,13 +29,29 @@ function tick (){
                 }
         }
         advs.forEach(function(adv) {
+            var pos = Grue.position(),
+                dx = pos.x - adv.sprite.x,
+                dy = pos.y - adv.sprite.y;
+            if (dx < epsilon && dy < epsilon) {
+                if (adv.light === "On") {
+                    Grue.die();
+                } else if (Grue.gulp()) {
+                    containers["adv"].removeChild(adv.sprite);
+                    var index = advs.indexOf(adv);
+                    if (index > -1) {
+                        advs.splice(index, 1);
+                    }
+                } else {
+                    Grue.die();
+                }
+            }
             if (adv.moving === false) {
                 var wp = adv.gate.waypoints[adv.idx];
                 if (wp) {
                     adv.move(wp.x, wp.y);
                     adv.idx += 1;
                 } else {
-                    containers["adv"].removeChild(adv);
+                    containers["adv"].removeChild(adv.sprite);
                     var index = advs.indexOf(adv);
                     if (index > -1) {
                         advs.splice(index, 1);
