@@ -40,20 +40,26 @@ Adventurer.prototype.move=function (x, y){
         .call(this.idle, [], this);
 }
 Adventurer.prototype.idle = function (){
-        this.sprite.gotoAndPlay("idle"+this.facing); 
+        this.sprite.gotoAndPlay("idle"+this.facing);
         this.moving=false;
 }
 function init (board){
     var advData= {
     images: [
-            imgPfx+"left1.png",
-            imgPfx+"left2.png",
-            imgPfx+"right1.png",
-            imgPfx+"right2.png",
-            imgPfx+"towards1.png",
-            imgPfx+"towards2.png",
-            imgPfx+"away1.png",
-            imgPfx+"away2.png"
+            imgPfx+"left1-lightON.png",
+            imgPfx+"left1-lightON.png",
+            imgPfx+"left2-lightON.png",
+            imgPfx+"left2-lightON.png",
+            imgPfx+"right1-lightON.png",
+            imgPfx+"right1-lightOFF.png",
+            imgPfx+"right2-lightON.png",
+            imgPfx+"right2-lightOFF.png",
+            imgPfx+"towards1-lightON.png",
+            imgPfx+"towards1-lightOFF.png",
+            imgPfx+"towards2-lightON.png",
+            imgPfx+"towards2-lightOFF.png",
+            imgPfx+"away1-lightON.png",
+            imgPfx+"away2-lightOFF.png"
     ],
     frames : { width: 64, height: 64, count: 8},
     animations: {
@@ -76,7 +82,7 @@ function init (board){
 }
 window.Adventurer = {
         init: init,
-        make: Adventurer 
+        make: Adventurer
 
 }
 })();
