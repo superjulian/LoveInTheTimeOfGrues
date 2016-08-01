@@ -12,14 +12,15 @@ Adventurer.prototype.show= function (x, y, targ){
         this.sprite.y = y;
         this.moving = false;
         this.facing = "Down";
-        this.light="On";
+        this.light="Off";
         targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){
-        this.light();
+        this.lightSwitch();
+        if (this.moving) { return; }
         var oldX = this.sprite.x;
         var oldY = this.sprite.y;
-        var that= this.sprite;
+        var that = this;
         this.moving = true;
         if (x > oldX) {
                 this.facing="Right";
@@ -37,12 +38,15 @@ Adventurer.prototype.move=function (x, y){
                 return;
         }
         this.sprite.gotoAndPlay("walk"+this.facing+this.light);
+        var w = 10 * Math.abs(x - oldX) + 10 * Math.abs(y - oldY);
         createjs.Tween.get(this.sprite)
-                .to({x: x, y: y}, 10 * Math.abs( x - oldX ) + 10 * Math.abs( y - oldY ), createjs.Ease.linear)
-        .call(this.idle, [], this);
+            .to({x: x, y: y}, w, createjs.Ease.linear)
+            .call(function() { that.idle(); });
 }
 Adventurer.prototype.talk= function () {
-        var index=Math.floor(Math.random() * 6) + 1;
+        var index = Math.floor(Math.random() * 6) + 1;
+        var text = new createjs.Text(text[index], "10px Arial", "#000000");
+        text.x=0;
 }
 Adventurer.prototype.lightSwitch = function (){
         if (this.light ==="On"){
@@ -51,7 +55,6 @@ Adventurer.prototype.lightSwitch = function (){
         else{
                 this.light="On";
         }
-                
 }
 Adventurer.prototype.idle = function (){
         this.sprite.gotoAndPlay("idle"+this.facing+this.light);
@@ -69,7 +72,6 @@ function init (board){
             imgPfx+"away1-lightON.png",
             imgPfx+"away2-lightON.png",
 
-            
             imgPfx+"left1-lightOFF.png",
             imgPfx+"left2-lightOFF.png",
             imgPfx+"right1-lightOFF.png",
@@ -79,7 +81,7 @@ function init (board){
             imgPfx+"away1-lightOFF.png",
             imgPfx+"away2-lightOFF.png",
     ],
-    frames : { width: 128, height: 128, count: 8},
+    frames : { width: 128, height: 128, count: 16},
     animations: {
             walkLeftOn: { frames: [0, 1] },
             walkRightOn: { frames: [2, 3] },
@@ -108,13 +110,24 @@ function init (board){
     //advSpriteSheet = new createjs.Sprite(advData, "idleDown");
     //board.addChild(advSprite);
 }
+
+function go_next(adv) {
+    var wp = adv.gate.waypoints[adv.idx];
+    adv.move(wp.x, wp.y);
+    adv.idx += 1;
+    if (wp.x && wp.y) {
+        adv.move(wp.x, wp.y);
+    }
+}
+
 window.Adventurer = {
         init: init,
+        ad : Adventurer,
         make: function (gate, targ){
                var adv= new Adventurer ();
+               adv.idx = 0;
                adv.gate=gate;
                adv.show(gate.x, gate.y, targ);
-               console.log(gate.x, gate.y, gate);
                return adv;
         }
 }
