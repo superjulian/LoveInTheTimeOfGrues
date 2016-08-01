@@ -12,7 +12,7 @@ Adventurer.prototype.show= function (x, y, targ){
         this.sprite.y = y;
         this.moving = false;
         this.facing = "Down";
-        this.light="Off";
+        this.light="On";
         targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){
@@ -46,7 +46,10 @@ Adventurer.prototype.move=function (x, y){
 Adventurer.prototype.talk= function () {
         var index = Math.floor(Math.random() * 6) + 1;
         var text = new createjs.Text(this.text[index], "10px Arial", "#000000");
-        text.x=0;
+        text.x=this.sprite.x;
+        text.y=this.sprite.y;
+        text.textBaseline = "alphabetic";
+
 }
 Adventurer.prototype.lightSwitch = function (){
         if (this.light ==="On"){
