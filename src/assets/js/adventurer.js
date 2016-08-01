@@ -12,6 +12,7 @@ Adventurer.prototype.show= function (x, y, targ){
         this.sprite.y = y;
         this.moving = false;
         this.facing = "Down";
+        this.light="ON";
         targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){
@@ -39,6 +40,15 @@ Adventurer.prototype.move=function (x, y){
                 .to({x: x, y: y}, 10 * Math.abs( x - oldX ) + 10 * Math.abs( y - oldY ), createjs.Ease.linear)
         .call(this.idle, [], this);
 }
+Adventurer.prototype.lightSwitch = function (){
+        if (this.light ==="On"){
+                this.light="Off";
+        }
+        else{
+                this.light="On";
+        }
+                
+}
 Adventurer.prototype.idle = function (){
         this.sprite.gotoAndPlay("idle"+this.facing);
         this.moving=false;
@@ -46,20 +56,24 @@ Adventurer.prototype.idle = function (){
 function init (board){
     var advData= {
     images: [
-            imgPfx+"left1-lightON.png",
-            imgPfx+"left1-lightOFF.png",
-            imgPfx+"left2-lightON.png",
-            imgPfx+"left2-lightOFF.png",
-            imgPfx+"right1-lightON.png",
-            imgPfx+"right1-lightOFF.png",
-            imgPfx+"right2-lightON.png",
-            imgPfx+"right2-lightOFF.png",
-            imgPfx+"towards1-lightON.png",
-            imgPfx+"towards1-lightOFF.png",
+            imgPfx+"left1-lightON.png", 
+            imgPfx+"left2-lightON.png", 
+            imgPfx+"right1-lightON.png", 
+            imgPfx+"right2-lightON.png", 
+            imgPfx+"towards1-lightON.png", 
             imgPfx+"towards2-lightON.png",
-            imgPfx+"towards2-lightOFF.png",
             imgPfx+"away1-lightON.png",
-            imgPfx+"away2-lightOFF.png"
+            imgPfx+"away2-lightON.png",
+
+            
+            imgPfx+"left1-lightOFF.png",
+            imgPfx+"left2-lightOFF.png",
+            imgPfx+"right1-lightOFF.png",
+            imgPfx+"right2-lightOFF.png",
+            imgPfx+"towards1-lightOFF.png",
+            imgPfx+"towards2-lightOFF.png",
+            imgPfx+"away1-lightOFF.png",
+            imgPfx+"away2-lightOFF.png",
     ],
     frames : { width: 128, height: 128, count: 8},
     animations: {
@@ -72,6 +86,8 @@ function init (board){
             idleRight: { frames: [2] },
             idleDown: { frames: [4] },
             idleUp: { frames: [6] },
+
+
     },
     framerate: 5
     }
