@@ -49,17 +49,17 @@
         {"type" : "fill", "fill" : "ground", "density" : 1, "layer" : "ground0"},
         {"type" : "fill", "fill" : "grass", "density" : 0.01, "bound" : 64, "min_x" : -64, "max_x" : 2048, "min_y" : -64, "max_y" : 2048, "layer" : "ground0"},
 
-        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 768, "min_y" : -64, "max_y" : 600, "layer" : "ground1"},
-        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 600, "min_y" : 600, "max_y" : 700, "layer" : "ground1"},
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 768, "min_y" : -64, "max_y" : 600, "layer" : "ground1", "cache" : true},
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 600, "min_y" : 600, "max_y" : 700, "layer" : "ground1", "cache" : true},
 
         {"type" : "grue", "x" : 600, "y" : 400},
 
-        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 732, "max_x" : 768, "min_y" : 732, "max_y" : 768, "layer" : "ground2"},
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 732, "max_x" : 768, "min_y" : 732, "max_y" : 768, "layer" : "ground2", "cache" : true},
 
-        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 1280, "max_x" : 2048, "min_y" : -32, "max_y" : 768, "layer" : "ground1"},
+        {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 1280, "max_x" : 2048, "min_y" : -32, "max_y" : 768, "layer" : "ground1", "cache" : true},
 
 
-        {"type" : "fill", "fill" : "tree", "density" : 0.15, "bound" : 32, "min_x" : -64, "max_x" : 1024, "min_y" : 992, "max_y" : 2048, "layer" : "ground2"},
-        {"type" : "fill", "fill" : "tree", "density" : 0.15, "bound" : 32, "min_x" : 1280, "max_x" : 2048, "min_y" : 992, "max_y" : 2048, "layer" : "ground2"}
+        {"type" : "fill", "fill" : "tree", "density" : 0.15, "bound" : 32, "min_x" : -64, "max_x" : 1024, "min_y" : 992, "max_y" : 2048, "layer" : "ground2", "cache" : true},
+        {"type" : "fill", "fill" : "tree", "density" : 0.15, "bound" : 32, "min_x" : 1280, "max_x" : 2048, "min_y" : 992, "max_y" : 2048, "layer" : "ground2", "cache" : true}
     ]
 }

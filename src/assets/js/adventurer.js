@@ -7,12 +7,12 @@ function Adventurer (){
         this.sprite= new createjs.Sprite(advSpriteSheet, "idleDown");
 
 }
-Adventurer.prototype.show= function (x, y, board){
+Adventurer.prototype.show= function (x, y, targ){
         this.sprite.x = x;
         this.sprite.y = y;
         this.moving = false;
         this.facing = "Down";
-        board.addChild(this.sprite);
+        targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){
         var oldX = this.sprite.x;
@@ -82,13 +82,12 @@ function init (board){
 }
 window.Adventurer = {
         init: init,
-        make: function (gate, board){
+        make: function (gate, targ){
                var adv= new Adventurer ();
                adv.gate=gate;
-               adv.show(gate.x, gate.y, board);
+               adv.show(gate.x, gate.y, targ);
                console.log(gate.x, gate.y, gate);
-               return adv; 
+               return adv;
         }
-
 }
 })();

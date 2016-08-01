@@ -20,9 +20,13 @@ const tileset = {
     ]
 };
 function tick (){
-        if (advs.length < 3){
+        if (advs.length < 1){
                 if (data) {
-                advs.push(Adventurer.make(data.poi[0], board));
+                    advs.push(Adventurer.make(data.poi[0], containers["adv"]));
+                    //Object.keys(containers).forEach(function(k) {
+                        //var b = containers[k].getBounds();
+                        //containers[k].cache(b.x, b.y, b.width, b.height);
+                    //});
                 }
         }
 }
@@ -104,7 +108,9 @@ function load(path) {
                 Grue.show(item.x, item.y, board);
             } else if (item.type === "fill") {
                 fill(item, tileset, container, event.result.size);
-                container.cache(0, 0, event.result.size.width, event.result.size.height);
+                if (item.cache) {
+                    container.cache(0, 0, event.result.size.width, event.result.size.height);
+                }
             } else {
                 create(item, tileset, container);
             }
@@ -120,8 +126,10 @@ function load(path) {
 }
 
 window.World = {
+    advs: advs,
     init: init,
     load: load,
+    board: function() { return board },
     containers: containers,
     world: function (){return board},
     dim : function() { return data.size; },
