@@ -22,9 +22,9 @@
         {
             "type" : "gate",
             "id" : "east_gate",
-            "x" : 10,
-            "y" : 442,
-           "waypoints" : [{"x" : 100, "y" : 400}, {"x" : 200, "y" : 400}, {"x" : 400, "y" : 400}, {"x" : 600, "y" : 400}, "west_gate"]
+            "x" : 0,
+            "y" : 850,
+            "waypoints" : [{"x" : 200, "y" : 900}, {"x" : 400, "y" : 900}, {"x" : 800, "y" : 900}, {"x" : 2000, "y" : 900}]
         },
         {
             "type" : "gate",
@@ -53,6 +53,7 @@
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 768, "min_y" : -64, "max_y" : 600, "layer" : "ground1", "cache" : true},
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : -64, "max_x" : 600, "min_y" : 600, "max_y" : 700, "layer" : "ground1", "cache" : true},
 
+        {"type" : "adv"},
         {"type" : "grue", "x" : 600, "y" : 400},
 
         {"type" : "fill", "fill" : "tree", "density" : 0.1, "bound" : 32, "min_x" : 732, "max_x" : 768, "min_y" : 732, "max_y" : 768, "layer" : "ground2", "cache" : true},

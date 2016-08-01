@@ -16,9 +16,10 @@ Adventurer.prototype.show= function (x, y, targ){
         targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){
+        if (this.moving) { return; }
         var oldX = this.sprite.x;
         var oldY = this.sprite.y;
-        var that= this.sprite;
+        var that = this;
         this.moving = true;
         if (x > oldX) {
                 this.facing="Right";
@@ -35,10 +36,11 @@ Adventurer.prototype.move=function (x, y){
         else {
                 return;
         }
+        var w = 10 * Math.abs(x - oldX) + 10 * Math.abs(y - oldY);
         this.sprite.gotoAndPlay("walk"+this.facing);
         createjs.Tween.get(this.sprite)
-                .to({x: x, y: y}, 10 * Math.abs( x - oldX ) + 10 * Math.abs( y - oldY ), createjs.Ease.linear)
-        .call(this.idle, [], this);
+            .to({x: x, y: y}, w, createjs.Ease.linear)
+            .call(function() { that.idle(); });
 }
 Adventurer.prototype.lightSwitch = function (){
         if (this.light ==="On"){
@@ -47,11 +49,11 @@ Adventurer.prototype.lightSwitch = function (){
         else{
                 this.light="On";
         }
-                
 }
-Adventurer.prototype.idle = function (){
-        this.sprite.gotoAndPlay("idle"+this.facing);
+Adventurer.prototype.idle = function () {
+    console.log("!");
         this.moving=false;
+        this.sprite.gotoAndPlay("idle"+this.facing);
 }
 function init (board){
     var advData= {
@@ -65,7 +67,6 @@ function init (board){
             imgPfx+"away1-lightON.png",
             imgPfx+"away2-lightON.png",
 
-            
             imgPfx+"left1-lightOFF.png",
             imgPfx+"left2-lightOFF.png",
             imgPfx+"right1-lightOFF.png",
@@ -96,13 +97,23 @@ function init (board){
     //advSpriteSheet = new createjs.Sprite(advData, "idleDown");
     //board.addChild(advSprite);
 }
+
+function go_next(adv) {
+    var wp = adv.gate.waypoints[adv.idx];
+    adv.move(wp.x, wp.y);
+    adv.idx += 1;
+    if (wp.x && wp.y) {
+        adv.move(wp.x, wp.y);
+    }
+}
+
 window.Adventurer = {
         init: init,
         make: function (gate, targ){
                var adv= new Adventurer ();
+               adv.idx = 0;
                adv.gate=gate;
                adv.show(gate.x, gate.y, targ);
-               console.log(gate.x, gate.y, gate);
                return adv;
         }
 }
