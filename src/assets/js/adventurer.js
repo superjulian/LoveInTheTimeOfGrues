@@ -3,9 +3,9 @@
 var imgPfx="assets/img/Adventurer-";
 var advSpriteSheet;
 
-function Adventurer (){
-        this.sprite= new createjs.Sprite(advSpriteSheet, "idleDownOn");
-
+function Adventurer (text){
+        this.sprite = new createjs.Sprite(advSpriteSheet, "idleDownOn");
+        this.text =text;
 }
 Adventurer.prototype.show= function (x, y, targ){
         this.sprite.x = x;
@@ -126,7 +126,7 @@ function go_next(adv) {
 window.Adventurer = {
         init: init,
         ad : Adventurer,
-        make: function (gate, targ){
+        make: function (gate, targ, text){
                var adv= new Adventurer ();
                adv.idx = 0;
                adv.gate=gate;
