@@ -5,6 +5,7 @@ var data = null;
 var board = null;
 var containers = {};
 var advs=[];
+
 const tileset = {
     tree: [
         new createjs.SpriteSheet({ images: ["/assets/img/Tree1.png"], frames: { width: 128, height: 192 }}),
@@ -20,15 +21,26 @@ const tileset = {
     ]
 };
 function tick (){
-        if (advs.length < 1){
+        if (World.has_action && advs.length < 1){
                 if (data) {
                     advs.push(Adventurer.make(data.poi[0], containers["adv"]));
-                    //Object.keys(containers).forEach(function(k) {
-                        //var b = containers[k].getBounds();
-                        //containers[k].cache(b.x, b.y, b.width, b.height);
-                    //});
                 }
         }
+        advs.forEach(function(adv) {
+            if (adv.moving === false) {
+                var wp = adv.gate.waypoints[adv.idx];
+                if (wp) {
+                    adv.move(wp.x, wp.y);
+                    adv.idx += 1;
+                } else {
+                    containers["adv"].removeChild(adv);
+                    var index = advs.indexOf(adv);
+                    if (index > -1) {
+                        advs.splice(index, 1);
+                    }
+                }
+            }
+        });
 }
 
 function sort_y(a, b) {
@@ -111,6 +123,9 @@ function load(path) {
                 if (item.cache) {
                     container.cache(0, 0, event.result.size.width, event.result.size.height);
                 }
+            } else if (item.type === "adv") {
+                containers["adv"] = new createjs.Container();
+                board.addChild(containers["adv"]);
             } else {
                 create(item, tileset, container);
             }
@@ -119,8 +134,6 @@ function load(path) {
         var pos = Grue.position();
         World.set_position(-pos.x, -pos.y, true);
         data = event.result;
-        containers["adv"] = new createjs.Container();
-        board.addChild(containers["adv"]);
     });
     preload.loadFile(path);
 }
@@ -134,7 +147,10 @@ window.World = {
     world: function (){return board},
     dim : function() { return data.size; },
     position: function() {
-        return {x : containers["ground0"].x, y : containers["ground0"].y};
+        return {
+            x : containers["ground0"].x,
+            y : containers["ground0"].y
+        };
     },
     set_position: function(x, y, immediate, spd) {
         let keys = Object.keys(containers);
@@ -151,7 +167,8 @@ window.World = {
     end_game: function() {
         Grue.end_game(board);
     },
-    tick: tick
+    tick: tick,
+    has_action: false
 };
 
 })();

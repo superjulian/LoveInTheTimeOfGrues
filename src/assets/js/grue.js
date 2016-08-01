@@ -196,6 +196,7 @@ function tick () {
     }
 
     if (xCo !== 0 || yCo !== 0) {
+        World.has_action = true;
         if (check_out_of_bounds(grueSprite.x + 7 * xCo, grueSprite.y + 7 * yCo, xCo, yCo)) {
             return;
         }
