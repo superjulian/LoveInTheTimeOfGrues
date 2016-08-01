@@ -36,7 +36,6 @@ function tick (){
             var pos = Grue.position(),
                 dx = Math.abs(2*pos.x - adv.sprite.x),
                 dy = Math.abs(2*pos.y - adv.sprite.y);
-            console.log(dx, dy);
             if (dx < epsilon && dy < epsilon) {
                 if (adv.light === "On") {
                     Grue.die();
