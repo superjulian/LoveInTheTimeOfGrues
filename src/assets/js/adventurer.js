@@ -4,7 +4,7 @@ var imgPfx="assets/img/Adventurer-";
 var advSpriteSheet;
 
 function Adventurer (){
-        this.sprite= new createjs.Sprite(advSpriteSheet, "idleDown");
+        this.sprite= new createjs.Sprite(advSpriteSheet, "idleDownOn");
 
 }
 Adventurer.prototype.show= function (x, y, targ){
@@ -12,10 +12,11 @@ Adventurer.prototype.show= function (x, y, targ){
         this.sprite.y = y;
         this.moving = false;
         this.facing = "Down";
-        this.light="ON";
+        this.light="On";
         targ.addChild(this.sprite);
 }
 Adventurer.prototype.move=function (x, y){
+        this.light();
         var oldX = this.sprite.x;
         var oldY = this.sprite.y;
         var that= this.sprite;
@@ -35,7 +36,7 @@ Adventurer.prototype.move=function (x, y){
         else {
                 return;
         }
-        this.sprite.gotoAndPlay("walk"+this.facing);
+        this.sprite.gotoAndPlay("walk"+this.facing+this.light);
         createjs.Tween.get(this.sprite)
                 .to({x: x, y: y}, 10 * Math.abs( x - oldX ) + 10 * Math.abs( y - oldY ), createjs.Ease.linear)
         .call(this.idle, [], this);
@@ -50,7 +51,7 @@ Adventurer.prototype.lightSwitch = function (){
                 
 }
 Adventurer.prototype.idle = function (){
-        this.sprite.gotoAndPlay("idle"+this.facing);
+        this.sprite.gotoAndPlay("idle"+this.facing+this.light);
         this.moving=false;
 }
 function init (board){
@@ -77,17 +78,25 @@ function init (board){
     ],
     frames : { width: 128, height: 128, count: 8},
     animations: {
-            walkLeft: { frames: [0, 1] },
-            walkRight: { frames: [2, 3] },
-            walkDown: { frames: [4, 5] },
-            walkUp: { frames: [6, 7] },
+            walkLeftOn: { frames: [0, 1] },
+            walkRightOn: { frames: [2, 3] },
+            walkDownOn: { frames: [4, 5] },
+            walkUpOn: { frames: [6, 7] },
 
-            idleLeft: { frames: [0] },
-            idleRight: { frames: [2] },
-            idleDown: { frames: [4] },
-            idleUp: { frames: [6] },
+            walkLeftOff: { frames: [8, 9] },
+            walkRightOff: { frames: [10, 11] },
+            walkDownOff: { frames: [12, 13] },
+            walkUpOff: { frames: [14, 15] },
 
+            idleLeftOn: { frames: [0] },
+            idleRightOn: { frames: [2] },
+            idleDownOn: { frames: [4] },
+            idleUpOn: { frames: [6] },
 
+            idleLeftOff: { frames: [8] },
+            idleRightOff: { frames: [10] },
+            idleDownOff: { frames: [12] },
+            idleUpOff: { frames: [14] }
     },
     framerate: 5
     }
