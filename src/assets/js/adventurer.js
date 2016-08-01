@@ -41,6 +41,9 @@ Adventurer.prototype.move=function (x, y){
                 .to({x: x, y: y}, 10 * Math.abs( x - oldX ) + 10 * Math.abs( y - oldY ), createjs.Ease.linear)
         .call(this.idle, [], this);
 }
+Adventurer.prototype.talk= function () {
+        var index=Math.floor(Math.random() * 6) + 1;
+}
 Adventurer.prototype.lightSwitch = function (){
         if (this.light ==="On"){
                 this.light="Off";
