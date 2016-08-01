@@ -106,6 +106,8 @@ function load(path) {
         data = event.result;
         var pos = Grue.position();
         World.set_position(-pos.x, -pos.y, true);
+        containers["adv"] = new createjs.Container();
+        board.addChild(containers["adv"]);
     });
     preload.loadFile(path);
 }
