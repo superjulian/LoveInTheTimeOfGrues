@@ -314,6 +314,7 @@ window.Grue = {
             });
         });
     },
+    gulp: function() { return gulp; },
     grueSprite: function() { return grueSprite; },
     die: function() { grueSprite.gotoAndPlay("dead"); }
 }
