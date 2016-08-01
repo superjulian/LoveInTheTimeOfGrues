@@ -45,7 +45,7 @@ Adventurer.prototype.move=function (x, y){
 }
 Adventurer.prototype.talk= function () {
         var index = Math.floor(Math.random() * 6) + 1;
-        var text = new createjs.Text(text[index], "10px Arial", "#000000");
+        var text = new createjs.Text(this.text[index], "10px Arial", "#000000");
         text.x=0;
 }
 Adventurer.prototype.lightSwitch = function (){
