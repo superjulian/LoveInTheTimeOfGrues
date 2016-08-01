@@ -21,9 +21,9 @@
         {
             "type" : "gate",
             "id" : "east_gate",
-            "x" : 800,
-            "y" : 400,
-            "waypoints" : [{"x" : 100, "y" : 400}, {"x" : 200, "y" : 400}, {"x" : 400, "y" : 400}, {"x" : 600, "y" : 400}, "west_gate"]
+            "x" : 10,
+            "y" : 442,
+           "waypoints" : [{"x" : 100, "y" : 400}, {"x" : 200, "y" : 400}, {"x" : 400, "y" : 400}, {"x" : 600, "y" : 400}, "west_gate"]
         },
         {
             "type" : "gate",
@@ -44,6 +44,7 @@
         [620, 1000, 500, 2048, 1, 1],
         [620, 1000, 0, 430, 1, -1]
     ],
+
     "scenery" : [
         {"type" : "fill", "fill" : "ground", "density" : 1, "layer" : "ground0"},
         {"type" : "fill", "fill" : "grass", "density" : 0.01, "bound" : 64, "min_x" : -64, "max_x" : 2048, "min_y" : -64, "max_y" : 2048, "layer" : "ground0"},
