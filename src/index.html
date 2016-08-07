@@ -1,7 +1,7 @@
 <html>
     <head>
         <!-- Load libraries -->
-        <script src="/assets/js/perlin.js"></script>
+        <script src="assets/js/perlin.js"></script>
 
         <!-- Load createjs assets -->
         <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
@@ -9,11 +9,11 @@
 	    <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
 
         <!-- Load library -->
-        <script src="/assets/js/grue.js"></script>
-        <script src="/assets/js/scenery.js"></script>
-        <script src="/assets/js/adventurer.js"></script>
-        <script src="/assets/js/keyboard.js"></script>
-        <script src="/assets/js/world.js"></script>
+        <script src="assets/js/grue.js"></script>
+        <script src="assets/js/scenery.js"></script>
+        <script src="assets/js/adventurer.js"></script>
+        <script src="assets/js/keyboard.js"></script>
+        <script src="assets/js/world.js"></script>
         <style>
             body {
                 overflow: hidden;
@@ -40,7 +40,7 @@
                 stage = new createjs.Stage("world");
                 World.init(stage);
                 Adventurer.init(stage);
-                World.load("/assets/map/level_1.json");
+                World.load("assets/map/level_1.json");
                 createjs.Ticker.setFPS(30);
                 createjs.Ticker.addEventListener("tick", handleTick);
                 function handleTick(event) {

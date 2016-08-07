@@ -10,16 +10,16 @@ var epsilon = 100;
 
 const tileset = {
     tree: [
-        new createjs.SpriteSheet({ images: ["/assets/img/Tree1.png"], frames: { width: 128, height: 192 }}),
-        new createjs.SpriteSheet({ images: ["/assets/img/Tree2.png"], frames: { width: 128, height: 192 }}),
-        new createjs.SpriteSheet({ images: ["/assets/img/Tree3.png"], frames: { width: 128, height: 192 }})
+        new createjs.SpriteSheet({ images: ["assets/img/Tree1.png"], frames: { width: 128, height: 192 }}),
+        new createjs.SpriteSheet({ images: ["assets/img/Tree2.png"], frames: { width: 128, height: 192 }}),
+        new createjs.SpriteSheet({ images: ["assets/img/Tree3.png"], frames: { width: 128, height: 192 }})
     ],
     grass: [
-        new createjs.SpriteSheet({ images: ["/assets/img/grass1.png"], frames: { width: 64, height: 64 }}),
-        new createjs.SpriteSheet({ images: ["/assets/img/grass2.png"], frames: { width: 64, height: 64 }}),
+        new createjs.SpriteSheet({ images: ["assets/img/grass1.png"], frames: { width: 64, height: 64 }}),
+        new createjs.SpriteSheet({ images: ["assets/img/grass2.png"], frames: { width: 64, height: 64 }}),
     ],
     ground: [
-        new createjs.SpriteSheet({ images: ["/assets/img/grass-blank.png"], frames: { width: 64, height: 64 }}),
+        new createjs.SpriteSheet({ images: ["assets/img/grass-blank.png"], frames: { width: 64, height: 64 }}),
     ]
 };
 function tick (){
